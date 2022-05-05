@@ -2,32 +2,32 @@
 
 namespace App\Repository;
 
-use App\Entity\PersonneEntity;
+use App\Entity\PFE;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Exception\ORMException;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<PersonneEntity>
+ * @extends ServiceEntityRepository<PFE>
  *
- * @method PersonneEntity|null find($id, $lockMode = null, $lockVersion = null)
- * @method PersonneEntity|null findOneBy(array $criteria, array $orderBy = null)
- * @method PersonneEntity[]    findAll()
- * @method PersonneEntity[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method PFE|null find($id, $lockMode = null, $lockVersion = null)
+ * @method PFE|null findOneBy(array $criteria, array $orderBy = null)
+ * @method PFE[]    findAll()
+ * @method PFE[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class PersonneEntityRepository extends ServiceEntityRepository
+class PFERepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, PersonneEntity::class);
+        parent::__construct($registry, PFE::class);
     }
 
     /**
      * @throws ORMException
      * @throws OptimisticLockException
      */
-    public function add(PersonneEntity $entity, bool $flush = false): void
+    public function add(PFE $entity, bool $flush = false): void
     {
         $this->_em->persist($entity);
         if ($flush) {
@@ -39,7 +39,7 @@ class PersonneEntityRepository extends ServiceEntityRepository
      * @throws ORMException
      * @throws OptimisticLockException
      */
-    public function remove(PersonneEntity $entity, bool $flush = false): void
+    public function remove(PFE $entity, bool $flush = false): void
     {
         $this->_em->remove($entity);
         if ($flush) {
@@ -47,8 +47,17 @@ class PersonneEntityRepository extends ServiceEntityRepository
         }
     }
 
+    public function findnb()
+    {
+        return $this->createQueryBuilder('p')
+            ->andWhere('')
+            ->setParameters([])
+            ->getQuery()
+            ->getResult();
+    }
+
 //    /**
-//     * @return PersonneEntity[] Returns an array of PersonneEntity objects
+//     * @return PFE[] Returns an array of PFE objects
 //     */
 //    public function findByExampleField($value): array
 //    {
@@ -62,7 +71,7 @@ class PersonneEntityRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?PersonneEntity
+//    public function findOneBySomeField($value): ?PFE
 //    {
 //        return $this->createQueryBuilder('p')
 //            ->andWhere('p.exampleField = :val')
